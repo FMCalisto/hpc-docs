@@ -12,6 +12,8 @@ nav_order: 2
 |---|---|---|---|
 | 1 per task, 20 tasks, 10 at a time | 1 GB per task | none | under a minute per task |
 
+**First run:** Downloads nothing beyond the [examples environment](../../README.md#before-you-start). Results take under 1 MB. See [Downloads and disk space](../../README.md#downloads-and-disk-space).
+
 Many small, independent runs are the most common HPC job, and a **job array** is the way to submit them: one script, one job ID, and `SLURM_ARRAY_TASK_ID` telling each task which case to run.
 
 Here each task runs 500 Monte Carlo trials of a Kalman filter tracking a target in 2D, for one sensor noise level between 0.25 m and 5 m. When all 20 tasks have succeeded, a second job, started with `--dependency=afterok`, collects the results into a table, a CSV file and a plot.

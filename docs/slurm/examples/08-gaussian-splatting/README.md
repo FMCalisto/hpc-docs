@@ -13,6 +13,8 @@ nav_order: 8
 | 1. Prepare: camera poses with COLMAP | 16 | 32 GB | none | 10–60 min for a video |
 | 2. Train and render | 8 | 64 GB | 1 × L40S | about 30 min |
 
+**First run:** The first run downloads the nerfstudio image (5.4 GB) and builds `~/containers/nerfstudio-1.1.3.sif` (5.5 GB of your home, 10–20 min, using about 20 GB of `/scratch` while it builds). The sample scene is about 0.2 GB. Each scene keeps 0.2–1 GB in `RESULTS_DIR`; jobs use 1–2 GB of `/scratch`. See [Downloads and disk space](../../README.md#downloads-and-disk-space).
+
 Turns a short phone video of a room, an object or a robot's workspace into a **3D Gaussian Splatting** model you can fly through, using [nerfstudio](https://docs.nerf.studio/) from its official container. It is a two-step **pipeline**: a CPU job finds the camera positions, and a GPU job, which Slurm starts only if the first succeeds, trains the model and renders a video. Splitting it this way means the GPU isn't held while COLMAP runs on CPUs.
 
 ## Run it
@@ -27,7 +29,7 @@ Turns a short phone video of a room, an object or a robot's workspace into a **3
 
 Files: [`submit.sh`](submit.sh), [`prepare.sbatch`](prepare.sbatch), [`train.sbatch`](train.sbatch), [`common.sh`](common.sh)
 
-The first run converts the nerfstudio image to `~/containers/nerfstudio-1.1.3.sif` (a few GB of your home quota). Each scene is kept in `~/results/splats/<scene>/` (set `RESULTS_DIR` for another place, such as your group's NAS). Preparation is skipped when the scene is already there, so you can rerun `submit.sh` safely.
+The first run converts the nerfstudio image to `~/containers/nerfstudio-1.1.3.sif` (5.5 GB of your home quota). Each scene is kept in `~/results/splats/<scene>/` (set `RESULTS_DIR` for another place, such as your group's NAS). Preparation is skipped when the scene is already there, so you can rerun `submit.sh` safely.
 
 ## What you should see
 

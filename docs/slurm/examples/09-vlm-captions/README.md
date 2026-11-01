@@ -12,6 +12,8 @@ nav_order: 9
 |---|---|---|---|
 | 8 | 64 GB | 1 × L40S | a few minutes to load, then a few images per second |
 
+**First run:** About 43 GB in all. `pull.sbatch` downloads the vLLM image (11.2 GB) and keeps an 11 GB `.sif` in your home (15–30 min, up to 35 GB of `/scratch` while it builds). Each new node downloads the model weights (30.9 GB, about 5 min at 100 MB/s) and COCO val2017 (0.8 GB) into `/scratch`, so plan for 32 GB of your 100 GiB `/scratch` quota there. Loading the model takes 2–5 min per job. See [Downloads and disk space](../../README.md#downloads-and-disk-space).
+
 Runs **Qwen3.8-27B**, a recent open-weight vision-language model, on one GPU of the cluster, with no cloud API and no data leaving ISR. The job reads a folder of images (COCO's sample photos, or your own robot camera frames, underwater footage or lab photos) and writes, for each one, a caption, the objects in it, the kind of environment and the hazards a mobile robot should avoid, as JSON lines.
 
 It uses [vLLM](https://docs.vllm.ai/), the standard engine for serving language models fast, from its official container run with Apptainer.
@@ -22,7 +24,7 @@ It uses [vLLM](https://docs.vllm.ai/), the standard engine for serving language 
 
     cd ~/slurm-examples/09-vlm-captions
 
-    # Once: convert the vLLM image to ~/containers/vllm-0.32.0.sif (about 10 GB)
+    # Once: convert the vLLM image to ~/containers/vllm-0.32.0.sif (about 11 GB)
     sbatch pull.sbatch
 
     # 200 photos from COCO val2017, a free dataset downloaded on first use
@@ -37,7 +39,7 @@ Files: [`pull.sbatch`](pull.sbatch), [`job.sbatch`](job.sbatch), [`caption.py`](
 
 | What | Where | Why |
 |---|---|---|
-| Model weights (about 30 GB) | `/scratch/$USER/hf-cache` | Downloaded once per node from Hugging Face, reused by later jobs there |
+| Model weights (30.9 GB) | `/scratch/$USER/hf-cache` | Downloaded once per node from Hugging Face, reused by later jobs there |
 | Sample images: [COCO val2017](https://cocodataset.org/#download) (5000 photos, 0.8 GB, CC BY 4.0) | `/scratch/$USER/datasets/coco-val2017` | Downloaded once per node |
 | Your images (`IMAGES=...`) | copied to `/scratch/$USER/<jobid>/images` | Read from the local disk, not over the network |
 | Captions | written to `/scratch/$USER/<jobid>/`, then copied to `~/results/vlm-captions/captions-<jobid>.jsonl` | Set `RESULTS_DIR` to keep them elsewhere, such as `/storage/anubis-nas/<group>/...` |

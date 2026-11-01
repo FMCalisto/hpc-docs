@@ -12,6 +12,8 @@ nav_order: 5
 |---|---|---|---|
 | 4 | 32 GB | 1 shard (a sixth of `hpc01`'s L40S) | up to 8 h, 2 h here |
 
+**First run:** Downloads nothing beyond the [examples environment](../../README.md#before-you-start). See [Downloads and disk space](../../README.md#downloads-and-disk-space).
+
 For trying things out, debugging a model, or a notebook, a whole GPU is usually more than you need. The `interactive` partition on `hpc01` splits its GPU into six **shards**: up to six users share it at once, so a shard often starts sooner than a whole GPU.
 
 This job starts JupyterLab on a shard and prints the SSH tunnel to reach it from your laptop.

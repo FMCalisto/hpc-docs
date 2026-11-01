@@ -12,6 +12,8 @@ nav_order: 7
 |---|---|---|---|
 | 16 | 64 GB | 1 × L40S | about 1 h for the H1 walking task |
 
+**First run:** Setup downloads about 12 GB (2 min, then 15–30 min to install) and takes 25–30 GB of your home, plus a 12 GB uv cache on that node's `/scratch` that you can delete afterwards. The first training run on each node also compiles shaders and fetches robot assets, 5–15 min. Each run keeps 0.1–1 GB of checkpoints and logs. See [Downloads and disk space](../../README.md#downloads-and-disk-space).
+
 Trains a reinforcement learning policy with [Isaac Lab](https://isaac-sim.github.io/IsaacLab/) 3.0, NVIDIA's robot learning framework on top of Isaac Sim. Thousands of copies of the robot are simulated in parallel on the GPU, and PPO (from [RSL-RL](https://github.com/leggedrobotics/rsl_rl)) learns from all of them at once. The default task teaches the Unitree **H1 humanoid** to walk and follow velocity commands.
 
 Isaac Sim and Isaac Lab are installed from pip into a uv environment in your home, so you can change Isaac Lab's code and add your own tasks. You can **watch** the robots in three ways, all streamed over WebRTC to your laptop:
@@ -27,7 +29,7 @@ Isaac Sim and Isaac Lab are installed from pip into a uv environment in your hom
     cd ~/slurm-examples/07-isaaclab-rl
     sbatch setup.sbatch
 
-This installs [uv](https://docs.astral.sh/uv/) in `~/.local/bin` if you don't have it, clones Isaac Lab `release/3.0.0` to `~/IsaacLab`, and installs Isaac Lab, Isaac Sim 6.2 and CUDA PyTorch in `~/IsaacLab/.venv`. It downloads about 20 GB and the environment takes about 15–20 GB of your [home quota](../../../user-guide/03-storage.md#quota). The download cache stays on the node's `/scratch`.
+This installs [uv](https://docs.astral.sh/uv/) in `~/.local/bin` if you don't have it, clones Isaac Lab `release/3.0.0` to `~/IsaacLab`, and installs Isaac Lab, Isaac Sim 6.2 and CUDA PyTorch in `~/IsaacLab/.venv`. It downloads about 12 GB and the environment takes 25–30 GB of your [home quota](../../../user-guide/03-storage.md#quota). The download cache stays on the node's `/scratch` (`/scratch/$USER/uv-cache`, 12 GB); delete it once setup has finished.
 
 By running Isaac Sim you accept the [NVIDIA Isaac Sim license](https://docs.isaacsim.omniverse.nvidia.com/latest/common/NVIDIA_Omniverse_License_Agreement.html); the scripts set `OMNI_KIT_ACCEPT_EULA=YES` for that.
 

@@ -12,6 +12,8 @@ nav_order: 1
 |---|---|---|---|
 | 1 | 1 GB | none | 5 min |
 
+**First run:** Downloads nothing and uses no disk space. See [Downloads and disk space](../../README.md#downloads-and-disk-space).
+
 The smallest useful job. It prints where it ran, which account, partition and QOS Slurm chose for you, and every `SLURM_*` variable the job can read. Run it first, to check that your account works.
 
 ## Run it

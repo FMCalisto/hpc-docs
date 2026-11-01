@@ -90,6 +90,25 @@ In a script, the pattern is:
 
 `/scratch` isn't shared: a file there is only visible on that node, and files untouched for 30 days are deleted. Long jobs that may restart on another node (examples 6 and 7) also copy their checkpoints out every 30 minutes. More in [Storage](../user-guide/03-storage.md#scratch).
 
+## Downloads and disk space
+
+What each example downloads the first time, and the space it needs. Downloads into `/scratch` happen once per node, so a job that lands on a new node downloads again. Your quotas are 200 GiB soft in your home and 100 GiB soft in `/scratch` on each node (see [Storage](../user-guide/03-storage.md)).
+
+| # | Downloads the first time | Time, first run | Home | `/scratch` per node |
+|---|---|---|---|---|
+| | Python environment (`setup-env.sbatch`): PyTorch, Ultralytics, JupyterLab | 3.2 GB: about 1 min, plus 5–10 min to install | 7 GB | 3 GB pip cache (can be deleted) |
+| 1 | nothing | | | |
+| 2 | nothing beyond the environment | | under 1 MB of results | under 1 MB while it runs |
+| 3, 4 | MNIST | 60 MB: seconds | 5 MB of results | 0.1 GB dataset cache |
+| 5 | nothing beyond the environment | | your notebooks | what you stage |
+| 6 | Pascal VOC, YOLO11n weights | 2.8 GB: under 1 min, plus 5–10 min to unpack and convert | 0.1–0.5 GB per run | 4 GB dataset cache (7 GB while unpacking), plus the run while it trains |
+| 7 | Isaac Lab, Isaac Sim 6.2, PyTorch (`setup.sbatch`); robot assets on the first run | 12 GB: about 2 min, plus 15–30 min to install; 5–15 min of shader compilation on each node's first run | 25–30 GB environment, a few GB of Isaac Sim caches, 0.1–1 GB per run | 12 GB uv cache (can be deleted after setup), under 1 GB per run |
+| 8 | nerfstudio image, sample scene | 5.6 GB: about 1 min, plus 10–20 min to build the `.sif` | 5.5 GB image, 0.2–1 GB per scene | 20 GB while building the image; 1–2 GB per job |
+| 9 | vLLM image, Qwen3.8-27B-FP8 weights, COCO val2017 | 43 GB (11 + 31 + 0.8): about 8 min, plus 15–30 min to build the `.sif`, plus 2–5 min to load the model per job | 11 GB image, under 1 MB of captions | 32 GB cache (weights + images); 35 GB while building the image |
+| 10 | CIFAR-10 on each node | 170 MB: seconds | 50 MB of results | 0.4 GB dataset cache |
+
+Sizes are measured from the registries and download servers (October 2026). Download times assume about 100 MB/s from the internet and will vary; unpacking, installing and image builds dominate. To free `/scratch` on a node, delete its caches in a job there, for example `srun --nodelist=hpc02 -t 5 rm -rf /scratch/$USER/hf-cache`.
+
 ## Datasets used
 
 All are free and downloaded by the jobs themselves, on first use on each node.

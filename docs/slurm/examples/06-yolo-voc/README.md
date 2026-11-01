@@ -12,6 +12,8 @@ nav_order: 6
 |---|---|---|---|
 | 16 | 64 GB | 1 × L40S | several hours for 100 epochs |
 
+**First run:** Downloads Pascal VOC (2.8 GB, under a minute, then 5–10 min to unpack and convert) on each new node. Needs 4 GB of `/scratch` for the dataset (7 GB while unpacking) and 0.1–0.5 GB in `RESULTS_DIR` per run. See [Downloads and disk space](../../README.md#downloads-and-disk-space).
+
 Trains an [Ultralytics YOLO11](https://docs.ultralytics.com/) detector on [Pascal VOC](http://host.robots.ox.ac.uk/pascal/VOC/), 20 object classes and about 16 000 training images. It is a realistic long GPU job, so it is built to **survive preemption and time limits**: it resumes from its last checkpoint when it starts again.
 
 ## Run it
@@ -28,7 +30,7 @@ Needs the [examples environment](../../README.md#before-you-start) (it includes 
 
 Files: [`job.sbatch`](job.sbatch), [`train_yolo.py`](train_yolo.py)
 
-The first run on a node downloads VOC (about 3 GB) to `/scratch/$USER/datasets` and converts it, which takes a while. Later runs on that node reuse it. The script also stores that path in your Ultralytics settings (`~/.config/Ultralytics/settings.json`), so other Ultralytics jobs use it too.
+The first run on a node downloads VOC to `/scratch/$USER/datasets` and converts it. Later runs on that node reuse it. The script also stores that path in your Ultralytics settings (`~/.config/Ultralytics/settings.json`), so other Ultralytics jobs use it too.
 
 ## What you should see
 
