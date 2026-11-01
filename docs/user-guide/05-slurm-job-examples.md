@@ -8,7 +8,7 @@ nav_order: 5
 
 [← User Guide](README.md) · [Home](../README.md)
 
-Small starting examples. Your Slurm account is your research group (`dsor`, `irsg`, `laseeb`, `sipg` or `vislab`). Check it with `sacctmgr show assoc user=$USER format=account,qos%25,defaultqos`. Create the log directory before submitting:
+Small starting examples. For complete workloads (training on CPUs and GPUs, Isaac Lab, YOLO, vision-language models, multi-node), see the [Slurm example jobs](../slurm/README.md). Your Slurm account is your research group (`dsor`, `irsg`, `laseeb`, `sipg` or `vislab`). Check it with `sacctmgr show assoc user=$USER format=account,qos%25,defaultqos`. Create the log directory before submitting:
 
     export SLURM_ACCOUNT="<your group>"
     mkdir -p "$HOME/slurm-logs"
@@ -142,4 +142,4 @@ For a problem report, include the job ID, the command or example used, approxima
 
 ## Not covered by these examples
 
-A multi-node GPU/NCCL job has not been tested on this cluster. Do not submit the multi-node case without specific SysAdmin coordination and confirmation of software, network, account, QoS, and test-window readiness.
+A multi-node GPU/NCCL job has not been tested on this cluster; a script for one is in [example 10](../slurm/examples/10-ddp-multinode/README.md). Do not submit the multi-node case without specific SysAdmin coordination and confirmation of software, network, account, QoS, and test-window readiness.
