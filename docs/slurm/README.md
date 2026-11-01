@@ -9,7 +9,7 @@ has_toc: false
 
 [← Home](../README.md)
 
-Every job on the cluster goes through [Slurm](https://slurm.schedmd.com/): you say what your job needs (CPUs, memory, GPUs, time) and Slurm starts it on a node where those are free. This section collects what you need to run jobs, and twelve complete example jobs, from a one-line test to training on four GPUs across four nodes.
+Every job on the cluster goes through [Slurm](https://slurm.schedmd.com/): you say what your job needs (CPUs, memory, GPUs, time) and Slurm starts it on a node where those are free. This section collects what you need to run jobs, and eleven complete example jobs, from a one-line test to training on four GPUs across four nodes.
 
 | To learn | Read |
 |---|---|
@@ -35,7 +35,6 @@ Each example is a folder with its job scripts and a page explaining what it does
 | 9 | [Label images with a vision-language model](examples/09-vlm-captions/README.md) | Qwen3.8-27B on one GPU with vLLM, no cloud API | 1 GPU |
 | 10 | [Training across several nodes](examples/10-ddp-multinode/README.md) | PyTorch DDP over two nodes with NCCL (ask an admin first) | 2 nodes × 1 GPU |
 | 11 | [Robot learning on 4 GPUs](examples/11-isaaclab-4gpu/README.md) | Isaac Lab across 4 nodes: 16 384 humanoids on rough terrain (ask an admin first) | 4 nodes × 1 GPU |
-| 12 | [Fine-tune a vision-language model on 4 GPUs](examples/12-vlm-finetune-fsdp/README.md) | FSDP + LoRA on Qwen3.8-27B; ⚠️ saturates the network (reserved slot only) | 4 nodes × 1 GPU |
 
 > These examples are written for this cluster but **haven't all been run on it yet**. Timings and outputs on the example pages are estimates. If one fails, tell your group's admin (see [Who's who](../overview/contacts.md)) with the job ID and the log.
 
@@ -49,7 +48,7 @@ Get the examples into your home on `hpc01`:
 
 Submit each example **from its own folder** (`cd ~/slurm-examples/03-mnist-cpu`, then `sbatch job.sbatch`): the scripts find their Python files through `$SLURM_SUBMIT_DIR`, and their logs land there.
 
-Examples 2–6, 10 and 12 share one Python environment with PyTorch, Ultralytics, JupyterLab and Hugging Face Transformers. Create it once, in a job:
+Examples 2–6 and 10 share one Python environment with PyTorch, Ultralytics and JupyterLab. Create it once, in a job:
 
     cd ~/slurm-examples
     sbatch setup-env.sbatch          # 5–10 min; creates ~/envs/slurm-examples
@@ -98,7 +97,7 @@ What each example downloads the first time, how long it takes to get ready, and 
 
 | # | Downloads the first time | Size | Download time | Setup time (unpack, install, build) | Home | `/scratch` per node |
 |---|---|---|---|---|---|---|
-| | Python environment (`setup-env.sbatch`): PyTorch, Ultralytics, JupyterLab, Transformers | 3.5 GB | under 1 min | 5–10 min to install into your home | 7 GB | 3 GB pip cache (can be deleted) |
+| | Python environment (`setup-env.sbatch`): PyTorch, Ultralytics, JupyterLab | 3.2 GB | under 1 min | 5–10 min to install into your home | 7 GB | 3 GB pip cache (can be deleted) |
 | 1 | nothing | | | | | |
 | 2 | nothing beyond the environment | | | | under 1 MB of results | under 1 MB while it runs |
 | 3, 4 | MNIST | 60 MB | seconds | seconds | 5 MB of results | 0.1 GB dataset cache |
@@ -109,7 +108,6 @@ What each example downloads the first time, how long it takes to get ready, and 
 | 9 | vLLM image, Qwen3.8-27B-FP8 weights, COCO val2017 | 43 GB (11.2 + 30.9 + 0.8) | 1–3 min | 15–30 min to build the `.sif` (once); 2–5 min to load the model in every job | 11 GB image, under 1 MB of captions | 32 GB cache (weights + images); 35 GB while building the image |
 | 10 | CIFAR-10 on each node | 170 MB | seconds | under 1 min to unpack | 50 MB of results | 0.4 GB dataset cache |
 | 11 | nothing beyond example 7's setup | | | 5–15 min of shader compilation on each node's first run | 0.1–1 GB per run | under 1 GB per run |
-| 12 | Qwen3.8-27B weights (BF16) and A-OKVQA, on each of the 4 nodes | 56.5 GB per node | 1–2 min, all nodes in parallel | 5–10 min to load the model in every job | about 100 MB adapter + logs | 57 GB cache per node |
 
 The sizes were measured from the registries and download servers in October 2026. Download times assume the cluster's 10 Gbit/s internet link at 0.3–1 GB/s; a single download is often limited by the server it comes from. Setup times are estimates: they depend mostly on writing many small files to your home on MooseFS, and they grow when several people do it at once. Submit a setup job once and let it finish before submitting the jobs that need it.
 
@@ -127,7 +125,6 @@ All are free and downloaded by the jobs themselves, on first use on each node.
 | Isaac Sim robot assets | | 7 | NVIDIA, downloaded by Isaac Sim |
 | Nerfstudio "poster" scene | 100 MB | 8 | [nerfstudio sample data](https://docs.nerf.studio/quickstart/existing_dataset.html) |
 | COCO 2017 validation images | 0.8 GB | 9 | [cocodataset.org](https://cocodataset.org/#download) (CC BY 4.0) |
-| A-OKVQA (from the_cauldron) | 0.9 GB | 12 | [huggingface.co/datasets/HuggingFaceM4/the_cauldron](https://huggingface.co/datasets/HuggingFaceM4/the_cauldron) |
 | CIFAR-10 | 170 MB | 10 | [cs.toronto.edu/~kriz/cifar.html](https://www.cs.toronto.edu/~kriz/cifar.html), via torchvision |
 
-The model weights (YOLO11, Qwen3.8-27B-FP8, Qwen3.8-27B) are downloaded the same way, from Ultralytics and Hugging Face.
+The model weights (YOLO11, Qwen3.8-27B-FP8) are downloaded the same way, from Ultralytics and Hugging Face.

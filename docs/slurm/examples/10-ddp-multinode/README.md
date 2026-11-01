@@ -60,5 +60,4 @@ Perfect scaling would be 2×. Over the nodes' Ethernet network, a small model li
 
 - Use the same pattern for your own model: wrap it in `DDP`, use a `DistributedSampler`, and only save from rank 0.
 - Isaac Lab trains across nodes the same way: [example 11](../11-isaaclab-4gpu/README.md) runs it on 4 GPUs.
-- A model too big for one GPU, sharded across nodes with FSDP: [example 12](../12-vlm-finetune-fsdp/README.md).
 - If a job hangs at start-up, run it again with `export NCCL_DEBUG=INFO` added to the script and send the log to your admin.
