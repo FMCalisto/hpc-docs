@@ -12,7 +12,7 @@ nav_order: 4
 |---|---|---|---|
 | 8 | 32 GB | 1 × L40S | a few minutes |
 
-**First run:** Downloads MNIST (60 MB, seconds) to `/scratch/$USER/datasets` on each new node; about 0.1 GB of `/scratch` and 5 MB of results. See [Downloads and disk space](../../README.md#downloads-and-disk-space).
+**First run:** Downloads MNIST (60 MB, seconds; no setup) to `/scratch/$USER/datasets` on each new node; about 0.1 GB of `/scratch` and 5 MB of results. See [Downloads and disk space](../../README.md#downloads-and-disk-space).
 
 The same model and script as [example 3](../03-mnist-cpu/README.md), on one GPU with mixed precision. Compare the epoch times of the two.
 

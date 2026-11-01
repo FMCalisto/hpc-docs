@@ -12,7 +12,7 @@ nav_order: 9
 |---|---|---|---|
 | 8 | 64 GB | 1 × L40S | a few minutes to load, then a few images per second |
 
-**First run:** About 43 GB in all. `pull.sbatch` downloads the vLLM image (11.2 GB) and keeps an 11 GB `.sif` in your home (15–30 min, up to 35 GB of `/scratch` while it builds). Each new node downloads the model weights (30.9 GB, about 5 min at 100 MB/s) and COCO val2017 (0.8 GB) into `/scratch`, so plan for 32 GB of your 100 GiB `/scratch` quota there. Loading the model takes 2–5 min per job. See [Downloads and disk space](../../README.md#downloads-and-disk-space).
+**First run:** About 43 GB in all. `pull.sbatch` downloads the vLLM image (11.2 GB, under a minute) and takes 15–30 min to build an 11 GB `.sif` in your home (using up to 35 GB of `/scratch` while it builds). Each new node downloads the model weights (30.9 GB, 1–2 min) and COCO val2017 (0.8 GB) into `/scratch`, so plan for 32 GB of your 100 GiB `/scratch` quota there. Loading the model takes 2–5 min per job. See [Downloads and disk space](../../README.md#downloads-and-disk-space).
 
 Runs **Qwen3.8-27B**, a recent open-weight vision-language model, on one GPU of the cluster, with no cloud API and no data leaving ISR. The job reads a folder of images (COCO's sample photos, or your own robot camera frames, underwater footage or lab photos) and writes, for each one, a caption, the objects in it, the kind of environment and the hazards a mobile robot should avoid, as JSON lines.
 

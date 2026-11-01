@@ -12,7 +12,7 @@ nav_order: 7
 |---|---|---|---|
 | 16 | 64 GB | 1 × L40S | about 1 h for the H1 walking task |
 
-**First run:** Setup downloads about 12 GB (2 min, then 15–30 min to install) and takes 25–30 GB of your home, plus a 12 GB uv cache on that node's `/scratch` that you can delete afterwards. The first training run on each node also compiles shaders and fetches robot assets, 5–15 min. Each run keeps 0.1–1 GB of checkpoints and logs. See [Downloads and disk space](../../README.md#downloads-and-disk-space).
+**First run:** Setup downloads about 12 GB (about 1 min) and takes 15–30 min to install and takes 25–30 GB of your home, plus a 12 GB uv cache on that node's `/scratch` that you can delete afterwards. The first training run on each node also compiles shaders and fetches robot assets, 5–15 min. Each run keeps 0.1–1 GB of checkpoints and logs. See [Downloads and disk space](../../README.md#downloads-and-disk-space).
 
 Trains a reinforcement learning policy with [Isaac Lab](https://isaac-sim.github.io/IsaacLab/) 3.0, NVIDIA's robot learning framework on top of Isaac Sim. Thousands of copies of the robot are simulated in parallel on the GPU, and PPO (from [RSL-RL](https://github.com/leggedrobotics/rsl_rl)) learns from all of them at once. The default task teaches the Unitree **H1 humanoid** to walk and follow velocity commands.
 

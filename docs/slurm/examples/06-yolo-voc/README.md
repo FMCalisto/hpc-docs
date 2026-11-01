@@ -12,7 +12,7 @@ nav_order: 6
 |---|---|---|---|
 | 16 | 64 GB | 1 × L40S | several hours for 100 epochs |
 
-**First run:** Downloads Pascal VOC (2.8 GB, under a minute, then 5–10 min to unpack and convert) on each new node. Needs 4 GB of `/scratch` for the dataset (7 GB while unpacking) and 0.1–0.5 GB in `RESULTS_DIR` per run. See [Downloads and disk space](../../README.md#downloads-and-disk-space).
+**First run:** Downloads Pascal VOC (2.8 GB, under a minute) on each new node, then takes 5–10 min to unzip it and convert the labels. Needs 4 GB of `/scratch` for the dataset (7 GB while unpacking) and 0.1–0.5 GB in `RESULTS_DIR` per run. See [Downloads and disk space](../../README.md#downloads-and-disk-space).
 
 Trains an [Ultralytics YOLO11](https://docs.ultralytics.com/) detector on [Pascal VOC](http://host.robots.ox.ac.uk/pascal/VOC/), 20 object classes and about 16 000 training images. It is a realistic long GPU job, so it is built to **survive preemption and time limits**: it resumes from its last checkpoint when it starts again.
 

@@ -12,7 +12,7 @@ nav_order: 10
 |---|---|---|---|---|
 | 2 | 16 per node | 64 GB per node | 1 × L40S per node | about 10 min |
 
-**First run:** Downloads CIFAR-10 (170 MB, seconds) on each node; 0.4 GB of `/scratch` per node and 50 MB of results. See [Downloads and disk space](../../README.md#downloads-and-disk-space).
+**First run:** Downloads CIFAR-10 (170 MB, seconds, under a minute to unpack) on each node; 0.4 GB of `/scratch` per node and 50 MB of results. See [Downloads and disk space](../../README.md#downloads-and-disk-space).
 
 > **Ask an admin before running this.** Multi-node jobs haven't been tested on this cluster yet, and a two-node job takes both GPUs of the `shared` partition. Your group's admin can confirm that your tier allows it and pick a quiet time. See [Who's who](../../../overview/contacts.md).
 

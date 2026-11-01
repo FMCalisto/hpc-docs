@@ -13,7 +13,7 @@ nav_order: 8
 | 1. Prepare: camera poses with COLMAP | 16 | 32 GB | none | 10–60 min for a video |
 | 2. Train and render | 8 | 64 GB | 1 × L40S | about 30 min |
 
-**First run:** The first run downloads the nerfstudio image (5.4 GB) and builds `~/containers/nerfstudio-1.1.3.sif` (5.5 GB of your home, 10–20 min, using about 20 GB of `/scratch` while it builds). The sample scene is about 0.2 GB. Each scene keeps 0.2–1 GB in `RESULTS_DIR`; jobs use 1–2 GB of `/scratch`. See [Downloads and disk space](../../README.md#downloads-and-disk-space).
+**First run:** The first run downloads the nerfstudio image (5.4 GB, under a minute) and takes 10–20 min to build `~/containers/nerfstudio-1.1.3.sif` (5.5 GB of your home, using about 20 GB of `/scratch` while it builds). The sample scene is about 0.2 GB. Each scene keeps 0.2–1 GB in `RESULTS_DIR`; jobs use 1–2 GB of `/scratch`. See [Downloads and disk space](../../README.md#downloads-and-disk-space).
 
 Turns a short phone video of a room, an object or a robot's workspace into a **3D Gaussian Splatting** model you can fly through, using [nerfstudio](https://docs.nerf.studio/) from its official container. It is a two-step **pipeline**: a CPU job finds the camera positions, and a GPU job, which Slurm starts only if the first succeeds, trains the model and renders a video. Splitting it this way means the GPU isn't held while COLMAP runs on CPUs.
 
