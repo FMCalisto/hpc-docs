@@ -13,6 +13,7 @@ New users should read the [User Guide](docs/user-guide/README.md) in order, star
 | Where to keep data, quotas | [Storage](docs/user-guide/03-storage.md) |
 | Containers | [Apptainer](docs/user-guide/09-apptainer.md) |
 | Running jobs | [Slurm basics](docs/user-guide/04-slurm-basics.md), [job script examples](docs/user-guide/05-slurm-job-examples.md) |
+| Complete example jobs | [Slurm examples](docs/slurm/README.md): CPU, GPU, Isaac Lab, YOLO, vision-language models, multi-node |
 | Tiers and priority | [Access and priority](docs/slurm/access-priority.md) |
 | Your group's node | [Group nodes](docs/user-guide/06-group-nodes.md) |
 | Problems | [FAQ and troubleshooting](docs/user-guide/07-faq.md) |
