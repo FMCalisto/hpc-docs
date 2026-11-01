@@ -1,5 +1,5 @@
 #!/bin/bash
-# Create the Python environment shared by examples 2–6 and 10.
+# Create the Python environment shared by examples 2–6, 10 and 12.
 # Run it once, from this folder:  sbatch setup-env.sbatch
 #SBATCH --job-name=setup-env
 #SBATCH --cpus-per-task=4

@@ -25,7 +25,7 @@ Documentation for users of the HPC cluster of the **Institute for Systems and Ro
 
 ## Running jobs → [Slurm](slurm/README.md)
 
-Ten example jobs, from a one-line test to training across several nodes, with the scripts to run them: [Slurm](slurm/README.md).
+Twelve example jobs, from a one-line test to training on four GPUs, with the scripts to run them: [Slurm](slurm/README.md).
 
 ## Conventions used in these pages
 

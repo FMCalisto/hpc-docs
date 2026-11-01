@@ -1,4 +1,4 @@
-# Python packages for examples 3–6 and 10.
+# Python packages for examples 2–6, 10 and 12.
 # Installed by setup-env.sbatch into $HOME/envs/slurm-examples.
 # The PyPI torch wheels bundle their own CUDA libraries; they only need the node's NVIDIA driver.
 torch
@@ -8,3 +8,9 @@ matplotlib
 tensorboard
 jupyterlab
 ultralytics
+# Example 12: fine-tuning a vision-language model
+transformers
+peft
+accelerate
+datasets
+pillow

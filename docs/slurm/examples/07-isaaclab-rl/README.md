@@ -88,4 +88,4 @@ It prints your own ports, computed from your user ID.
 
 - Watch the curves: `tensorboard --logdir ~/results/isaaclab/logs` in a [Jupyter shard](../05-jupyter-shard/README.md).
 - Several seeds at once: a job array with `--export=ALL,...` and `--seed $SLURM_ARRAY_TASK_ID` added to the `isaaclab train` line, as in [example 2](../02-kalman-sweep/README.md).
-- Many GPUs: Isaac Lab's `--distributed` flag runs one process per GPU across nodes, like [example 10](../10-ddp-multinode/README.md).
+- Many GPUs: [example 11](../11-isaaclab-4gpu/README.md) trains on 4 GPUs across 4 nodes.
